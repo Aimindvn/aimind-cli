@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AiMind CLI Template Schema",
+  "description": "Schema for validating template configurations",
+  "type": "object",
+  "properties": {
+    "templates": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z0-9-]+$": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Template name"
+            },
+            "description": {
+              "type": "string",
+              "description": "Template description"
+            },
+            "author": {
+              "type": "string",
+              "description": "Template author"
+            },
+            "version": {
+              "type": "string",
+              "pattern": "^\\d+\\.\\d+\\.\\d+$",
+              "description": "Template version (semver)"
+            },
+            "variables": {
+              "type": "array",
+              "description": "Variables used in template processing",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Variable name"
+                  },
+                  "prompt": {
+                    "type": "string",
+                    "description": "Prompt message for the variable"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": ["input", "confirm", "list", "checkbox"],
+                    "default": "input",
+                    "description": "Type of input"
+                  },
+                  "default": {
+                    "description": "Default value for the variable"
+                  },
+                  "choices": {
+                    "type": "array",
+                    "description": "Available choices for list/checkbox types",
+                    "items": {
+                      "oneOf": [
+                        { "type": "string" },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "name": { "type": "string" },
+                            "value": {}
+                          },
+                          "required": ["name", "value"]
+                        }
+                      ]
+                    }
+                  },
+                  "required": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Whether the variable is required"
+                  }
+                },
+                "required": ["name"]
+              }
+            },
+            "postInstall": {
+              "type": "array",
+              "description": "Post-installation instructions",
+              "items": {
+                "type": "string"
+              }
+            },
+            "tags": {
+              "type": "array",
+              "description": "Template tags for categorization",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": ["name", "description"]
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

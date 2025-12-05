@@ -1,0 +1,7 @@
+{
+  "name": "AiMind Next.js Template",
+  "description": "A modern Next.js template with TypeScript, Tailwind CSS, and best practices",
+  "author": "AiMind Team",
+  "version": "1.0.0",
+  "tags": ["nextjs", "typescript", "tailwindcss", "react"]
+}

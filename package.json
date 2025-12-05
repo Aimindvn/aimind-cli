@@ -1,0 +1,57 @@
+{
+  "name": "aimind-cli",
+  "version": "1.0.0",
+  "description": "A powerful CLI tool for scaffolding code templates from compressed archives",
+  "main": "src/index.js",
+  "bin": {
+    "aimind": "src/index.js"
+  },
+  "files": [
+    "src/index.js",
+    "templates/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node src/test.js",
+    "link": "npm link",
+    "unlink": "npm unlink -g aimind-cli",
+    "prepublishOnly": "npm test",
+    "prepare-publish": "node scripts/prepare-publish.js"
+  },
+  "keywords": [
+    "cli",
+    "scaffolding",
+    "template",
+    "generator",
+    "boilerplate",
+    "code-generator",
+    "project-generator",
+    "npm-package"
+  ],
+  "author": "AiMind Team",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aimindvn/aimind-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Aimindvn/aimind-cli/issues"
+  },
+  "homepage": "https://github.com/Aimindvn/aimind-cli#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "commander": "^11.1.0",
+    "inquirer": "^9.2.12",
+    "fs-extra": "^11.1.1",
+    "chalk": "^4.1.2",
+    "ora": "^5.4.1",
+    "tar": "^6.2.0"
+  },
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "public"
+  }
+}
