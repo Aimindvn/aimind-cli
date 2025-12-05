@@ -26,15 +26,15 @@ async function runTests() {
     }
 
     // Test 3: Check package.json structure
-    const packagePath = path.join(__dirname, 'package.json');
+    const packagePath = path.join(__dirname, '..', 'package.json');
     const packageJson = await fs.readJson(packagePath);
 
     if (!packageJson.bin || !packageJson.bin.aimind) {
       throw new Error('package.json missing bin.aimind configuration');
     }
 
-    if (!packageJson.files || !packageJson.files.includes('index.js')) {
-      throw new Error('package.json files array should include index.js');
+    if (!packageJson.files || !packageJson.files.includes('src/index.js')) {
+      throw new Error('package.json files array should include src/index.js');
     }
 
     console.log('✅ All basic tests passed!');
