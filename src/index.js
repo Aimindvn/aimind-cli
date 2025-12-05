@@ -1,14 +1,19 @@
 #!/usr/bin/env node
 
-const { program } = require('commander');
-const { default: inquirer } = require('inquirer');
-const fs = require('fs-extra');
-const path = require('path');
-const chalk = require('chalk');
-const ora = require('ora');
-const tar = require('tar');
+import { program } from 'commander';
+import { default as inquirer } from 'inquirer';
+import fs from 'fs-extra';
+import path from 'path';
+import chalk from 'chalk';
+import ora from 'ora';
+import tar from 'tar';
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
 
-const packageJson = require('../package.json');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const packageJson = JSON.parse(readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8'));
 
 program
   .name('aimind')
@@ -94,8 +99,8 @@ async function extractTemplate(templatePath, targetDir) {
 }
 
 async function runCommand(command, cwd) {
-  const { exec } = require('child_process');
-  const { promisify } = require('util');
+  const { exec } = await import('child_process');
+  const { promisify } = await import('util');
   const execAsync = promisify(exec);
   
   return execAsync(command, { cwd });

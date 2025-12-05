@@ -1,7 +1,12 @@
 #!/usr/bin/env node
 
-const fs = require('fs-extra');
-const path = require('path');
+import fs from 'fs-extra';
+import path from 'path';
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Basic smoke test for the CLI
 async function runTests() {
@@ -27,7 +32,7 @@ async function runTests() {
 
     // Test 3: Check package.json structure
     const packagePath = path.join(__dirname, '..', 'package.json');
-    const packageJson = await fs.readJson(packagePath);
+    const packageJson = JSON.parse(readFileSync(packagePath, 'utf8'));
 
     if (!packageJson.bin || !packageJson.bin.aimind) {
       throw new Error('package.json missing bin.aimind configuration');
