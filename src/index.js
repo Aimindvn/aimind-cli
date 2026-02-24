@@ -213,6 +213,8 @@ program
       }
       
       // Install dependencies
+
+      // Check for package.json to determine if npm install is needed
       const packageJsonPath = path.join(targetDir, 'package.json');
       if (await fs.pathExists(packageJsonPath)) {
         console.log(chalk.blue('📦 Installing dependencies...'));
@@ -221,6 +223,23 @@ program
           console.log(chalk.green('✅ Dependencies installed'));
         } catch (error) {
           console.log(chalk.yellow('⚠️  Dependency installation failed'));
+        }
+      }
+
+      // Check for Python dependencies if pyproject.toml exists
+      const pyproject = path.join(targetDir, 'pyproject.toml');
+      if (await fs.pathExists(pyproject)) {
+        console.log(chalk.blue('📦 Installing Python dependencies...'));
+        try {
+          await runCommand(`python -m venv .venv`, targetDir);
+          if (process.platform === 'win32') {
+            await runCommand(`venv\\Scripts\\activate ; pip install -e .`, targetDir);
+          } else {
+            await runCommand(`source venv/bin/activate && pip install -e .`, targetDir);
+          }
+          console.log(chalk.green('✅ Python dependencies installed'));
+        } catch (error) {
+          console.log(chalk.yellow('⚠️  Python dependency installation failed'));
         }
       }
       
