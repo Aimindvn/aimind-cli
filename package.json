@@ -1,6 +1,6 @@
 {
   "name": "aimind-cli",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A powerful CLI tool for scaffolding code templates from compressed archives",
   "type": "module",
   "main": "src/index.js",
