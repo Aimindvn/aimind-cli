@@ -1,0 +1,13 @@
+{
+  "name": "AiMind Python Hexagonal Architecture Template",
+  "description": "A modern Python template with Hexagonal Architecture, following best practices, support authentication, and ready for production",
+  "author": "AiMind Team",
+  "version": "0.1.0",
+  "tags": [
+    "python",
+    "fastapi",
+    "peewee",
+    "authentication",
+    "hexagonal-architecture"
+  ]
+}
